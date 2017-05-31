@@ -1,0 +1,5 @@
+#stack work directory
+.stack-work
+
+#generated files
+*.swp
