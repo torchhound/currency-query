@@ -6,9 +6,8 @@ import Network.HTTP.Conduit (simpleHttp)
 import qualified Data.ByteString.Lazy as BSL
 import Data.Aeson
 import GHC.Generics
-import Control.Monad
 import Control.Applicative
-import Data.Maybe
+import System.Environment
 
 data Currency = Currency { 
   base :: String,
@@ -25,8 +24,17 @@ instance FromJSON Currency where
 jsonURL :: String
 jsonURL = "https://api.fixer.io/latest"
 
+argsCheck :: String -> [String] -> String
+argsCheck url args = 
+  case args of
+    [] -> url
+    _ -> url ++ "?symbols=" ++ (foldr (++) [] (fmap (\el -> el++",") args))
+
 getJSON :: IO BSL.ByteString
-getJSON = simpleHttp jsonURL
+getJSON = 
+  do
+    args <- getArgs
+    simpleHttp $ argsCheck jsonURL args
 
 main :: IO ()
 main = do
