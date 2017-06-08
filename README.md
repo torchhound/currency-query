@@ -10,7 +10,7 @@ Get all available currency pricing from fixer.io or any number of specific curre
 
 `stack build`
 
-`stack exec hask-rogue-exe`
+`stack exec currency-query`
 
 or
 
