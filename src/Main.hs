@@ -12,7 +12,7 @@ import System.Environment
 data Currency = Currency { 
   base :: String,
   date :: String,
-  rates :: Object } deriving(Show, Generic)
+  rates :: Object } deriving (Show, Generic)
 
 instance FromJSON Currency where
   parseJSON = withObject "currency" $ \obj -> do
